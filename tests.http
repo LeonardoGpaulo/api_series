@@ -1,5 +1,26 @@
-GET http://127.0.0.1:8000/resto/10/7 HTTP/1.1
+### Variáveis de ambiente
+@base_url = http://127.0.0.1:8000
 
-###
+### Teste de conexão com a API
+GET {{base_url}}/ HTTP/1.1
+Accept: application/json
 
-GET http://127.0.0.1:8000/IMC/60/1.77 HTTP/1.1"
+### Criação de uma Série
+POST {{base_url}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "titulo": "Vikings",
+    "descricao": "Um homem que busca tomar o territorio de paris junto de um monge .", 
+    "ano_lancamento":"2013"
+}
+
+### Obtenção de todas as Séries
+GET {{base_url}}/series HTTP/1.1
+Accept: application/json
+
+
+### Atualizar tarefas
+
+PUT {{base_url}}/uptade HTTP/1.1
+Accept : application/json
