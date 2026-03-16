@@ -18,15 +18,18 @@ async def criar_serie(dados: SerieSchema, db: Session = Depends(get_db)):
 async def listar_series(db: Session = Depends(get_db)):
     return db.query(SerieModel).all()
 
-@serie.patch("/update")
-async def atualizar_series(id:int, titulo: str,descricao: str, ano_lancamento:int, db: Session = Depends(get_db)):
-    resultados = {"titulo": titulo, "descricao": descricao, "ano_lancamento": ano_lancamento}   
-    db.commit()
-    db.refresh(resultados)
-    return resultados
-    
+@serie.put("/update/")
+async def atualizar_serie(id: int, dados: SerieSchema, db: Session = Depends(get_db)):
+    serie = db.query(SerieModel).filter(SerieModel.id == id).first()
+    if not serie:
+        return ("Série não encontrada")
 
-@serie.delete("/deletar/{id}")
+    db.query(SerieModel).filter(SerieModel.id == id).update(dados.model_dump(exclude_unset=True))
+    db.commit()
+    return (dados)
+
+
+@serie.delete("/deletar/")
 async def deletar_series(id:int, db: Session = Depends(get_db)):
     id = db.query(SerieModel).filter(SerieModel.id == id).first()
 
