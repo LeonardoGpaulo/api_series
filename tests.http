@@ -21,6 +21,15 @@ Accept: application/json
 
 
 ### Atualizar tarefas
+PUT {{base_url}}/serie/7/update HTTP/1.1
+Content-Type: application/json
 
-PUT {{base_url}}/uptade HTTP/1.1
-Accept : application/json
+{
+    "titulo": "leo loco",
+    "descricao": "hachsdjc", 
+    "ano_lancamento":"2009"
+}
+
+### Remoção de uma série existente
+DELETE {{base_url}}/serie/7/delete HTTP/1.1
+Accept: application/json
